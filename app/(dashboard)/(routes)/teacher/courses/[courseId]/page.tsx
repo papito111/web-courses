@@ -5,7 +5,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
 import { LayoutDashboard } from 'lucide-react';
-
+import TitleForm from './_components/title-form';
 
 const CourseIdPage = async ({ params }:
     {
@@ -56,11 +56,16 @@ const CourseIdPage = async ({ params }:
                  {/* //tu moge zmienic bo teraz mi troche ucieka na lewoo */}
                 <div>
                     <div className='flex items-center gap-x-2'>
-                        <IconBadge icon={LayoutDashboard} size="sm" variant="success"/>
+                        <IconBadge icon={LayoutDashboard} />
                         <h2 className='text-xl'>
                             Customize your course
                         </h2>
                     </div>
+                    <TitleForm 
+                        initialData = {course}
+                        courseId = {course.id}
+                    
+                    />
                 </div>
                 
             </div>           
