@@ -35,15 +35,31 @@ const CourseIdPage = async ({ params }:
 
     const totalFields = requiredFields.length;
     const completedFields = requiredFields.filter(Boolean).length; //tu bedzie lista tych requiered field ktora nie jest falszem
-    const completionText = `${completedFields}/${totalFields} is completed`
+    const completionText = `${completedFields}/${totalFields}`
 
     return (
-        <div>
-            Course Id: {params.courseId} <br />
-            User Id: {userId} <br />
-            Course Title: {course?.title}<br />
-            Author id: {course?.userId}<br />
-            <p>{completionText}</p>
+        <div className='p-6'>
+            <div className='flex items-center justify-between'>
+                <div className='flex flex-col gap-y-2'>
+                    <h1 className='text-2xl font-semibold'>
+                        Course setup
+                    </h1>
+                    <span className='text-sm text-slate-700'>
+                        Complete all fields({completionText})
+                    </span>
+                </div>
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6'>
+                 {/* //tu moge zmienic bo teraz mi troche ucieka na lewoo */}
+                <div>
+                    <div className='flex items-center gap-x-2'>
+                        <h2 className='text-xl'>
+                            Customize your course
+                        </h2>
+                    </div>
+                </div>
+                
+            </div>           
         </div>
     )
 }
