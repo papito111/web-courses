@@ -52,8 +52,9 @@ const CourseIdPage = async ({ params }:
                     </span>
                 </div>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-3 mt-6'>
-                 {/* //tu moge zmienic bo teraz mi troche ucieka na lewoo */}
+            <div className='grid grid-cols-1 md:grid-cols-1 gap-3 mt-6'> 
+
+                 {/* //tu moge zmienic bo teraz mi grid cols na 1 lub 2 troche ucieka na lewoo */}
                 <div>
                     <div className='flex items-center gap-x-2'>
                         <IconBadge icon={LayoutDashboard} />
