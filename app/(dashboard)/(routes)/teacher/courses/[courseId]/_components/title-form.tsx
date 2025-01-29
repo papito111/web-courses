@@ -13,8 +13,10 @@ import{
     FormMessage,
     FormLabel,
     
+    
 } from "@/components/ui/form";
 
+import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import{ Input } from '@/components/ui/input';
 import toast from 'react-hot-toast';
@@ -67,7 +69,7 @@ const TitleForm = ({initialData, courseId} : TitleFormProps) => {
 
 
   return (
-    <div className='border mt-6 bg-slate-200 rounded-md p-3'>
+    <div className='border mt-6 bg-slate-200 rounded-md p-2'>
 
         <div className='font-medium flex items-center justify-between'>
             Course Title
@@ -83,6 +85,7 @@ const TitleForm = ({initialData, courseId} : TitleFormProps) => {
                 )}
                 
             </Button>
+            
         </div>
         {!isEditing && (
             <p className='text-sm mt-2 text-center'>
