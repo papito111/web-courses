@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { db } from '@/lib/db'
 import { auth } from "@clerk/nextjs/server";
@@ -6,6 +7,13 @@ import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
 import { LayoutDashboard } from 'lucide-react';
 import TitleForm from './_components/title-form';
+import DescriptionForm from './_components/description-form';
+import ImageForm from './_components/image-form';
+import {
+    generateUploadButton,
+    generateUploadDropzone,
+  } from "@uploadthing/react";
+
 
 const CourseIdPage = async ({ params }:
     {
@@ -67,7 +75,18 @@ const CourseIdPage = async ({ params }:
                         courseId = {course.id}
                     
                     />
+                    <DescriptionForm
+                        initialData={course}
+                        courseId={course.id}
+                    />
+                    <ImageForm 
+                     initialData={course}
+                     courseId={course.id}
+                    
+                    
+                    />
                 </div>
+                
                 
             </div>           
         </div>
