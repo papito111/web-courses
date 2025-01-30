@@ -1,12 +1,12 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { auth } from "@clerk/nextjs/server";
+import { getAuth } from "@clerk/nextjs/server";
 const f = createUploadthing();
 
 const auth = (req: Request) => ({ id: "fakeId" }); 
 
 const handleAuth = () => {
-  const { userId } = auth();
+  const { userId } = getAuth(res);
   if (!userId) throw new Error("Unauthorized");
   return {userId};
 }
@@ -21,7 +21,7 @@ export const ourFileRouter = {
     .onUploadComplete(() =>{}),
     
   chapterVideo: f({video: {maxFileCount: 1, maxFileSize:"64GB"}})
-    .middleware(() => handleAuth)
+    .middleware(() => handleAuth())
     .onUploadComplete(() => {})
  
 } satisfies FileRouter;
