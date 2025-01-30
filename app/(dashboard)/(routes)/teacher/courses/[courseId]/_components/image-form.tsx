@@ -25,6 +25,7 @@ import toast from 'react-hot-toast';
 
 import { useRouter } from 'next/navigation';
 import { Course } from '@prisma/client';
+import { FileUpload } from '@/components/ui/file-uploader';
 
 
 interface ImageFormProps {
@@ -111,38 +112,20 @@ const ImageForm = ({initialData, courseId} : ImageFormProps) => {
             )
         )}
         {isEditing && (
-            <Form {...form}>
-                <form 
-                onSubmit={form.handleSubmit(onSubmit)}
-                className='space-y-2 mt-3'>
-                    <FormField
-                    control={form.control}
-                    name='Image'
-                    render={({field}) => (
-                        <FormItem>
-                            <FormControl>
-
-                            <Input
-                            disabled={isSubmitting}
-                            placeholder='Enter course Image'
-                            {...field}/>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                    <div className='flex items-center my-0 justify-center gap-x-5'>
-                        <Button
-                        disabled={!isValid || isSubmitting}
-                        type="submit"
-                        >
-                            Safe
-                        </Button>
-
-                    </div>
-
-                </form>
-            </Form>
+            <div>
+                <FileUpload
+                    endpoint="courseImage" 
+                    
+                    onChange={(url) => {
+                        if(url) {
+                            onSubmit({imageUrl: url});
+                        }
+                    }}
+                />
+                <div>
+                    16:9 ratio recommended
+                </div>
+            </div>
         )}
         {/* --- {initialData.title} --- {courseId} */}
     </div>
