@@ -9,6 +9,8 @@ import { LayoutDashboard } from 'lucide-react';
 import TitleForm from './_components/title-form';
 import DescriptionForm from './_components/description-form';
 import ImageForm from './_components/image-form';
+import CategoryForm from './_components/category-form';
+
 import {
     generateUploadButton,
     generateUploadDropzone,
@@ -49,7 +51,7 @@ const CourseIdPage = async ({ params }:
             name: "asc",
         },
     });
-    console.log(categories)
+    // console.log(categories)
 
     const totalFields = requiredFields.length;
     const completedFields = requiredFields.filter(Boolean).length; //tu bedzie lista tych requiered field ktora nie jest falszem
@@ -92,6 +94,16 @@ const CourseIdPage = async ({ params }:
                     
                     
                     />
+                    <CategoryForm
+                    initialData={course}
+                    courseId={course.id}
+                    options={categories.map((category)=>({
+                    label: category.name,
+                    value: category.id
+                    })
+                    )}
+
+                        />
                 </div>
                 
                 
