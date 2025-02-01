@@ -118,7 +118,7 @@ const TitleForm = ({initialData, courseId} : TitleFormProps) => {
                         disabled={!isValid || isSubmitting}
                         type="submit"
                         >
-                            Safe
+                            Save
                         </Button>
 
                     </div>

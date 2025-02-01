@@ -117,7 +117,7 @@ const DescriptionForm = ({initialData, courseId} : DescriptionFormProps) => {
                         disabled={!isValid || isSubmitting}
                         type="submit"
                         >
-                            Safe
+                            Save
                         </Button>
 
                     </div>
