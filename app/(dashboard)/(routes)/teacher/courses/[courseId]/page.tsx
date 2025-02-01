@@ -44,6 +44,13 @@ const CourseIdPage = async ({ params }:
      course.categoryId,   
     ]
 
+    const categories = await db.category.findMany({
+        orderBy: {
+            name: "asc",
+        },
+    });
+    console.log(categories)
+
     const totalFields = requiredFields.length;
     const completedFields = requiredFields.filter(Boolean).length; //tu bedzie lista tych requiered field ktora nie jest falszem
     const completionText = `${completedFields}/${totalFields}`
