@@ -15,6 +15,7 @@ import {
     generateUploadButton,
     generateUploadDropzone,
   } from "@uploadthing/react";
+import PriceForm from './_components/price-form';
 
 
 const CourseIdPage = async ({ params }:
@@ -126,6 +127,11 @@ const CourseIdPage = async ({ params }:
                                 </h2>
 
                             </div>
+                            <PriceForm
+                            initialData={course}
+                            courseId={course.id}
+                            />
+
                         </div>
                     </div>
                 </div>
