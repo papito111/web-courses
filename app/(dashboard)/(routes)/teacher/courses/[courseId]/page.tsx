@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
-import { LayoutDashboard } from 'lucide-react';
+import { CircleDollarSign, LayoutDashboard, ListChecks } from 'lucide-react';
 import TitleForm from './_components/title-form';
 import DescriptionForm from './_components/description-form';
 import ImageForm from './_components/image-form';
@@ -58,7 +58,7 @@ const CourseIdPage = async ({ params }:
     const completionText = `${completedFields}/${totalFields}`
 
     return (
-        <div className='p-3 w-11/12 md:w-7/12'>
+        <div className='p-3 w-11/12 md:w-11/12 '>
             <div className='flex items-center justify-between'>
                 <div className='flex flex-col gap-y-2'>
                     <h1 className='text-2xl font-semibold'>
@@ -69,7 +69,7 @@ const CourseIdPage = async ({ params }:
                     </span>
                 </div>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-1 gap-3 mt-6'> 
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-6'> 
 
                  {/* //tu moge zmienic bo teraz mi grid cols na 1 lub 2 troche ucieka na lewoo */}
                 <div>
@@ -102,8 +102,32 @@ const CourseIdPage = async ({ params }:
                     value: category.id
                     })
                     )}
+                    />
+                    
+                </div>
+                <div>
+                    <div className='spac-y-y6'>
+                        <div>
+                            <div className='flex items-center gap-2'>
+                                <IconBadge icon={ListChecks} />
+                                <h2 className='text-xl '>
+                                    Course chapters
+                                </h2>
+                            </div>
+                            <div className='py-2'>
+                                ToDo: chapters
+                            </div>
+                        </div>
+                        <div>
+                            <div className='flex items-center mt-2 gap-2'>
+                                <IconBadge icon={CircleDollarSign} />
+                                <h2>
+                                    Sell your course
+                                </h2>
 
-                        />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 
