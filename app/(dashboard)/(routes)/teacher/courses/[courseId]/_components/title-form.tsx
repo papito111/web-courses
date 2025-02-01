@@ -69,7 +69,7 @@ const TitleForm = ({initialData, courseId} : TitleFormProps) => {
 
 
   return (
-    <div className='border mt-6 bg-slate-200 rounded-md p-2'>
+    <div className='border  mt-6 bg-slate-200 rounded-md p-2'>
 
         <div className='font-medium flex items-center justify-between'>
             Course Title

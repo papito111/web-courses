@@ -49,7 +49,7 @@ const CourseIdPage = async ({ params }:
     const completionText = `${completedFields}/${totalFields}`
 
     return (
-        <div className='p-3'>
+        <div className='p-3 w-11/12 md:w-7/12'>
             <div className='flex items-center justify-between'>
                 <div className='flex flex-col gap-y-2'>
                     <h1 className='text-2xl font-semibold'>

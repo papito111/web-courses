@@ -98,7 +98,7 @@ const ImageForm = ({initialData, courseId} : ImageFormProps) => {
         {!isEditing && (
             !initialData.imageUrl ? (
                 <div className='flex items-center justify-center h-60'>
-                    <ImageIcon className='h03 w03'/>
+                    <ImageIcon className='h-3 w-3'/>
                 </div>
             ) : (
                 <div className='relative aspect-video mt-2'>

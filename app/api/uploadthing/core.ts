@@ -3,17 +3,17 @@ import { UploadThingError } from "uploadthing/server";
 import { getAuth } from "@clerk/nextjs/server";
 const f = createUploadthing();
 
-const auth = (req: Request) => ({ id: "fakeId" }); 
+const getauth = (req: Request) => ({ id: "fakeId" }); 
 
 const handleAuth = () => {
-  const { userId } = getAuth(res);
+  const { userId } = getAuth(req);
   if (!userId) throw new Error("Unauthorized");
   return {userId};
 }
 
 export const ourFileRouter = {
   courseImage: f({ image: { maxFileSize: "4MB", maxFileCount: 1 }})
-    .middleware(()=> handleAuth())
+    // .middleware(()=> handleAuth())
     .onUploadComplete(() => {}),
 
   courseAttachment: f(["text","image","video","audio", "pdf"])
