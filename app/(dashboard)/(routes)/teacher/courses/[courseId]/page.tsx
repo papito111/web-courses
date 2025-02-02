@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
-import { CircleDollarSign, LayoutDashboard, ListChecks } from 'lucide-react';
+import { CircleDollarSign, LayoutDashboard, ListChecks, File } from 'lucide-react';
 import TitleForm from './_components/title-form';
 import DescriptionForm from './_components/description-form';
 import ImageForm from './_components/image-form';
@@ -16,6 +16,7 @@ import {
     generateUploadDropzone,
   } from "@uploadthing/react";
 import PriceForm from './_components/price-form';
+import AttachmentsForm from './_components/attachments-form';
 
 
 const CourseIdPage = async ({ params }:
@@ -24,7 +25,8 @@ const CourseIdPage = async ({ params }:
     }) => {
     const reqHeaders = headers();
     const { userId } = auth({ headers: reqHeaders });
-    console.log(userId);
+    // to powyzej nie dziala
+    // console.log(userId);
 
     // if (!userId) {
     //     redirect("/sign-in");
@@ -33,6 +35,13 @@ const CourseIdPage = async ({ params }:
     const course = await db.course.findUnique({
         where: {
             id: params.courseId
+        },
+        include:{
+            attachments:{
+                orderBy: {
+                    createdAt: "desc"
+                }
+            }
         }
     });
 
@@ -59,7 +68,7 @@ const CourseIdPage = async ({ params }:
     const completionText = `${completedFields}/${totalFields}`
 
     return (
-        <div className='p-3 w-11/12 md:w-11/12 '>
+        <div className='p-1 w-11/12 md:w-11/12 '>
             <div className='flex items-center justify-between'>
                 <div className='flex flex-col gap-y-2'>
                     <h1 className='text-2xl font-semibold'>
@@ -128,6 +137,21 @@ const CourseIdPage = async ({ params }:
 
                             </div>
                             <PriceForm
+                            initialData={course}
+                            courseId={course.id}
+                            />
+
+
+                        </div>
+                        <div>
+                        <div className='flex items-center mt-2 gap-2'>
+                                <IconBadge icon={File} />
+                                <h2>
+                                    Add attachments for your course
+                                </h2>
+
+                            </div>
+                            <AttachmentsForm
                             initialData={course}
                             courseId={course.id}
                             />

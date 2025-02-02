@@ -105,6 +105,9 @@ const ImageForm = ({initialData, courseId} : ImageFormProps) => {
                     <Image
                     alt="Upload"
                     fill
+                    priority
+                    placeholder='blur'
+                    blurDataURL={initialData.imageUrl}
                     className="object-cover rounded-md"
                     src={initialData.imageUrl}
                     />

@@ -78,8 +78,11 @@ const DescriptionForm = ({initialData, courseId} : DescriptionFormProps) => {
                 )}
                 { !isEditing && (
                     <>
-                    <Pencil  className='h-4 w-4' />
+                    <Pencil  className='h-4 w-4 ' />
+                    
                     Edit Description
+
+                    
                     </>
                 )}
                 
