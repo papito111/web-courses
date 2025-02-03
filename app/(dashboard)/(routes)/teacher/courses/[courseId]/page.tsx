@@ -17,6 +17,7 @@ import {
   } from "@uploadthing/react";
 import PriceForm from './_components/price-form';
 import AttachmentsForm from './_components/attachments-form';
+import ChapterForm from './_components/chapters-form';
 
 
 const CourseIdPage = async ({ params }:
@@ -34,9 +35,16 @@ const CourseIdPage = async ({ params }:
 
     const course = await db.course.findUnique({
         where: {
-            id: params.courseId
+            id: params.courseId,
+            userId
         },
         include:{
+
+            chapters:{ orderBy: {
+                position: "asc",
+            },
+
+            },
             attachments:{
                 orderBy: {
                     createdAt: "desc"
@@ -53,7 +61,8 @@ const CourseIdPage = async ({ params }:
      course.description,   
      course.imageUrl,   
      course.price,   
-     course.categoryId,   
+     course.categoryId,  
+     course.chapters.some(chapter => chapter.isPublished), 
     ]
 
     const categories = await db.category.findMany({
@@ -124,9 +133,11 @@ const CourseIdPage = async ({ params }:
                                     Course chapters
                                 </h2>
                             </div>
-                            <div className='py-2'>
-                                ToDo: chapters
-                            </div>
+                            <ChapterForm 
+                            initialData={course}
+                            courseId={course.id}
+                            />
+                            
                         </div>
                         <div>
                             <div className='flex items-center mt-2 gap-2'>
