@@ -1,10 +1,10 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import * as z from "zod";
 import axios from 'axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
-import { Pencil } from 'lucide-react';
+import { Pencil, PlusCircle } from 'lucide-react';
 import{
     Form,
     FormControl,
@@ -22,46 +22,44 @@ import{ Input } from '@/components/ui/input';
 import toast from 'react-hot-toast';
 
 import { useRouter } from 'next/navigation';
-import { Course } from '@prisma/client';
+import { Course, Chapter} from '@prisma/client';
 
-
+import { cn } from '@/lib/utils';
 interface ChapterFormProps {
-    initialData: Course;
+    initialData: Course & {chapters:Chapter[]};
     courseId: string;
 };
 
 const formSchema = z.object({
-    description: z.string().min(1, {
-        message: "description is required",
-    }),
+    title: z.string().min(1),
 
 });
 
 
-const ChapterForm = ({initialData, courseId} : ChapterFormProps) => {
+export const ChapterForm = ({initialData, courseId} : ChapterFormProps) => {
 
     const router = useRouter();
+    const [isCreating, setIsCreating] = useState(false)
+    const[isUpdating, setisUpdating] = React.useState(false);
 
-    const[isEditing, setisEditing] = React.useState(false);
-
-    const toggleEdit = () => setisEditing((current) => !current); 
+    const toggleCreating = () => setIsCreating  ((current) => !current); 
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues:{description: initialData?.description || ""},
+        defaultValues:{title: ""},
     });
 
     const { isSubmitting, isValid } = form.formState;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            await axios.patch(`/api/courses/${courseId}`,values);
-            toast.success("Course is updated");
-            toggleEdit();
+            await axios.patch(`/api/courses/${courseId}/chapters`,values);
+            toast.success("Chapter is updated");
+            toggleCreating();
             router.refresh();
         }catch(error) {
             console.log("something went wrong", error)
-            toast.error("Failed to update the course")
+            toast.error("Failed to update the chapter")
         }
     }
 
@@ -71,44 +69,41 @@ const ChapterForm = ({initialData, courseId} : ChapterFormProps) => {
     <div className='border mt-6 bg-slate-200 rounded-md p-2'>
 
         <div className='font-medium flex items-center justify-between'>
-            Chapters
-            <Button onClick={toggleEdit} className = "hover:bg-transparent" variant="ghost">
-                {isEditing && (
+            Course chapters
+            <Button onClick={toggleCreating} className = "hover:bg-transparent" variant="ghost">
+                {isCreating ? (
                     <>Cancel</>
-                )}
-                { !isEditing && (
+                  ):(
+                
                     <>
-                    <Pencil  className='h-4 w-4 ' />
+                    <PlusCircle  className='h-4 w-4 ' />
                     
-                    Edit Description
+                    Add Chapter
 
                     
                     </>
+                
                 )}
                 
             </Button>
             
         </div>
-        {!isEditing && (
-            <p className='text-sm mt-2 text-center'>
-                 {initialData.description}
-            </p>
-        )}
-        {isEditing && (
+        
+        {isCreating && (
             <Form {...form}>
                 <form 
                 onSubmit={form.handleSubmit(onSubmit)}
                 className='space-y-2 mt-3'>
                     <FormField
                     control={form.control}
-                    name='description'
+                    name='title'
                     render={({field}) => (
                         <FormItem>
                             <FormControl>
 
                             <Input
                             disabled={isSubmitting}
-                            placeholder='Enter course description'
+                            placeholder='Enter course introduction'
                             {...field}/>
                             </FormControl>
                             <FormMessage />
@@ -120,7 +115,7 @@ const ChapterForm = ({initialData, courseId} : ChapterFormProps) => {
                         disabled={!isValid || isSubmitting}
                         type="submit"
                         >
-                            Save
+                            Create
                         </Button>
 
                     </div>
@@ -128,6 +123,18 @@ const ChapterForm = ({initialData, courseId} : ChapterFormProps) => {
                 </form>
             </Form>
         )}
+        {!isCreating &&(
+            <div className={cn("text-sm mt-2", !initialData.chapters.length && "text-slate-500 italic")}>
+                {!initialData.chapters.length && "No chapters"}
+                
+            </div>
+        )} { !isCreating &&(
+            <p className='text-xs text-muted-foreground mt-2'>
+                Drag and drop to reorder the chapters
+            </p>
+        )
+
+        }
         {/* --- {initialData.title} --- {courseId} */}
     </div>
   )
