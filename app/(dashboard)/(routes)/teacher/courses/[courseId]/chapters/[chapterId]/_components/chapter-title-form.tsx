@@ -56,7 +56,7 @@ const ChapterTitle = ({initialData, chapterId} : ChapterTitleProps) => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            await axios.patch(`/api/courses/${chapterId}`,values);
+            await axios.patch(`/api/courses/${chapterId}/chapters/${chapterId}`,values);
             toast.success("Course is updated");
             toggleEdit();
             router.refresh();
@@ -69,10 +69,11 @@ const ChapterTitle = ({initialData, chapterId} : ChapterTitleProps) => {
 
 
   return (
+    <div className=''>
     <div className='border  mt-6 bg-slate-200 rounded-md p-2'>
 
         <div className='font-medium flex items-center justify-between'>
-            Course Title
+            Chapter Title
             <Button onClick={toggleEdit} className = "hover:bg-transparent" variant="ghost">
                 {isEditing && (
                     <>Cancel</>
@@ -127,6 +128,7 @@ const ChapterTitle = ({initialData, chapterId} : ChapterTitleProps) => {
             </Form>
         )}
         {/* --- {initialData.title} --- {chapterId} */}
+    </div>
     </div>
   )
 }
