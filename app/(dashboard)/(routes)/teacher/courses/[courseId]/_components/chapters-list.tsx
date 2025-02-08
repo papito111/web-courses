@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Chapter } from '@prisma/client'
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd"
 import { Badge } from '@/components/ui/badge';
-import { Grip } from 'lucide-react';
+import { Grip, Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ChaptersListProps {
@@ -77,7 +77,12 @@ export const ChaptersList: React.FC<ChaptersListProps> = ({
                         <Badge>
                           Free
                         </Badge>
-                      )}
+                      )} <Badge className={cn('bg-slate-400', chapter.isPublished && ("bg-emerald-400"))}>
+                        {chapter.isPublished ? "Published": "Draft"}
+
+                      </Badge>
+                      <Pencil className='h-4 w-4 hover:opacity-50'
+                      onClick={()=>onEdit(chapter.id)}/>
                     </div>
                   </div>
                 )}

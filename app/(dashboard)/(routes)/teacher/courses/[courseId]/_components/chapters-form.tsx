@@ -80,6 +80,9 @@ export const ChapterForm = ({initialData, courseId} : ChapterFormProps) => {
         }
     }
 
+    const onEdit = (id:string) => {
+        router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+    }
   return (
     <div className='border mt-6 bg-slate-200 rounded-md p-2'>
 
@@ -142,13 +145,13 @@ export const ChapterForm = ({initialData, courseId} : ChapterFormProps) => {
             <div className={cn("text-sm mt-2", !initialData.chapters.length && "text-slate-500 italic")}>
                 {!initialData.chapters.length && "No chapters"}
                 <ChaptersList
-                onEdit={()=>{}}
+                onEdit={onEdit}
                 onReorder={onReorder}
                 items={initialData.chapters}
                 />
             </div>
         )} { !isCreating &&(
-            <p className='text-xs text-muted-foreground mt-2'>
+            <p className='text-xs text-center text-muted-foreground mt-2'>
                 Drag and drop to reorder the chapters
             </p>
         )
