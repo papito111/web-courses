@@ -4,6 +4,8 @@ import { auth } from '@clerk/nextjs/server';
 import { headers } from 'next/headers';
 import { getAuth } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
+import ChapterDescriptionForm from './_components/chapter-description-form';
+import ChapterTitle from './_components/chapter-title-form';
 const EditChapterPage = async ({ params }:
     {
         params: { courseId: string; chapterId: string }
@@ -28,6 +30,10 @@ const EditChapterPage = async ({ params }:
     return(
       <div>
          {params.courseId}
+         <ChapterTitle 
+         initialData={chapter}
+         chapterId={params.chapterId}
+         />
       </div>
     )
     }
