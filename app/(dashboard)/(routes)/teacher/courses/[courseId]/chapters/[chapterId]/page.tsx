@@ -43,6 +43,11 @@ const EditChapterPage = async ({ params }:
          chapterId={params.chapterId}
          courseId={params.courseId}
          />
+         <ChapterDescriptionForm 
+         initialData={chapter}
+         chapterId={params.chapterId}
+         courseId={params.courseId}
+         />
         </div>
         </div>
       </div>

@@ -23,11 +23,14 @@ import toast from 'react-hot-toast';
 
 import { useRouter } from 'next/navigation';
 import { Course } from '@prisma/client';
+import { Editor } from '@/components/editor';
+import { cn } from '@/lib/utils';
 
 
 interface ChapterDescriptionFormProps {
     initialData: Course;
     courseId: string;
+    chapterId: string;
 };
 
 const formSchema = z.object({
@@ -38,7 +41,7 @@ const formSchema = z.object({
 });
 
 
-const ChapterDescriptionForm = ({initialData, courseId} : ChapterDescriptionFormProps) => {
+const ChapterDescriptionForm = ({initialData, courseId, chapterId} : ChapterDescriptionFormProps) => {
 
     const router = useRouter();
 
@@ -55,8 +58,8 @@ const ChapterDescriptionForm = ({initialData, courseId} : ChapterDescriptionForm
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            await axios.patch(`/api/courses/${courseId}`,values);
-            toast.success("Course is updated");
+            await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`,values);
+            toast.success("Chapter is updated");
             toggleEdit();
             router.refresh();
         }catch(error) {
@@ -71,7 +74,7 @@ const ChapterDescriptionForm = ({initialData, courseId} : ChapterDescriptionForm
     <div className='border mt-6 bg-slate-200 rounded-md p-2'>
 
         <div className='font-medium flex items-center justify-between'>
-            Description
+            Chapter Description
             <Button onClick={toggleEdit} className = "hover:bg-transparent" variant="ghost">
                 {isEditing && (
                     <>Cancel</>
@@ -90,9 +93,10 @@ const ChapterDescriptionForm = ({initialData, courseId} : ChapterDescriptionForm
             
         </div>
         {!isEditing && (
-            <p className='text-sm mt-2 text-center'>
-                 {initialData.description}
-            </p>
+            <div className={cn('text-sm mt-2 text-center',
+                 !initialData.description && "text-slate-500 italic")} >
+                    {initialData.description || "No description"}
+            </div>
         )}
         {isEditing && (
             <Form {...form}>
@@ -106,9 +110,8 @@ const ChapterDescriptionForm = ({initialData, courseId} : ChapterDescriptionForm
                         <FormItem>
                             <FormControl>
 
-                            <Input
-                            disabled={isSubmitting}
-                            placeholder='Enter course description'
+                            <Editor
+                            
                             {...field}/>
                             </FormControl>
                             <FormMessage />
