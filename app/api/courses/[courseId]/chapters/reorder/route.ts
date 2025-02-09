@@ -20,7 +20,7 @@ export async function PUT(req:NextRequest, {params}:
                     userId: userId
                 },});
 
-                
+            console.log(ownCourse)  
             if(!ownCourse){
                 return new NextResponse("Unothoarized",{status:401});
 

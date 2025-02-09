@@ -28,6 +28,8 @@ interface ChapterTitleProps {
     initialData: {
         title : string,
     };
+    courseId: string;
+
     chapterId: string;
 };
 
@@ -39,7 +41,7 @@ const formSchema = z.object({
 });
 
 
-const ChapterTitle = ({initialData, chapterId} : ChapterTitleProps) => {
+const ChapterTitle = ({initialData, chapterId, courseId} : ChapterTitleProps) => {
 
     const router = useRouter();
 
@@ -51,12 +53,12 @@ const ChapterTitle = ({initialData, chapterId} : ChapterTitleProps) => {
         resolver: zodResolver(formSchema),
         defaultValues: initialData,
     });
-
+    // console.log("ssssssssssssss",courseId, chapterId)
     const { isSubmitting, isValid } = form.formState;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            await axios.patch(`/api/courses/${chapterId}/chapters/${chapterId}`,values);
+            await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`,values);
             toast.success("Course is updated");
             toggleEdit();
             router.refresh();
