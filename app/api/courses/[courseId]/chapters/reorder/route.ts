@@ -1,8 +1,10 @@
 import { getAuth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { NextRequest } from "next/server";
 
-export async function PUT(req:Request, {params}:
+
+export async function PUT(req:NextRequest, {params}:
     {params:{courseId:string}}) {
         try{
             const {userId} = getAuth(req)
