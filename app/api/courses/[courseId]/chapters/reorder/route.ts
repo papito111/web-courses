@@ -8,7 +8,7 @@ export async function PUT(req:NextRequest, {params}:
     {params:{courseId:string}}) {
         try{
             const {userId} = getAuth(req)
-            console.log(userId)
+            console.log("reorder made by: ",userId)
             if(!userId){
                 return new NextResponse("Unothoarized",{status:401})
             }
@@ -19,6 +19,8 @@ export async function PUT(req:NextRequest, {params}:
                     id: params.courseId,
                     userId: userId
                 },});
+
+                
             if(!ownCourse){
                 return new NextResponse("Unothoarized",{status:401});
 
