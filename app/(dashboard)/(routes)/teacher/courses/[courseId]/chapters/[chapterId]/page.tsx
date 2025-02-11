@@ -8,6 +8,11 @@ import ChapterDescriptionForm from './_components/chapter-description-form';
 import ChapterTitle from './_components/chapter-title-form';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { LayoutDashboard, Eye } from 'lucide-react';
+
+import { IconBadge } from '@/components/icon-badge';
+import ChapterAccessForm from './_components/chapter-access-form';
+
 const EditChapterPage = async ({ params }:
     {
         params: { courseId: string; chapterId: string }
@@ -38,6 +43,18 @@ const EditChapterPage = async ({ params }:
          <ArrowLeft className='h-4 w-4 mr-2'/>
          Back to chapter setup
          </Link >
+         <div>
+          <h1 className='font-bold text-3xl py-2 text-center'>Chapter Creation</h1>
+         </div>
+         <div>
+          
+         <div className='flex mt-5 items-center gap-x-2'>
+                        <IconBadge icon={LayoutDashboard} />
+                        <h2 className='text-xl'>
+                            Customize your chapter
+                        </h2>
+                    </div>
+                    
          <ChapterTitle
          initialData={chapter}
          chapterId={params.chapterId}
@@ -48,7 +65,26 @@ const EditChapterPage = async ({ params }:
          chapterId={params.chapterId}
          courseId={params.courseId}
          />
+         </div>
+         <div>
+         <div className='flex mt-5 items-center gap-x-2'>
+                        <IconBadge icon={Eye} />
+                        <h2 className='text-xl'>
+                            Access Settings
+                        </h2>
+                    </div>
+         </div>
+         <div>
+          <ChapterAccessForm 
+          initialData={chapter}
+          chapterId={params.chapterId}
+          courseId={params.courseId}/>
+         </div>
         </div>
+        <div>
+
+        </div>
+
         </div>
       </div>
     )
