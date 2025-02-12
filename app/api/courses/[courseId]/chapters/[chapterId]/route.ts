@@ -3,6 +3,13 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { NextRequest } from "next/server";
 
+import {Mux} from "@mux/mux-node"
+
+const { video } = new Mux(
+    process.env.MUX_TOKEN_ID!,
+    process.env.MUX_TOKEN_SECRET!,
+);
+
 
 
 export async function PATCH(req:NextRequest,{params}:{params:{courseId:string, chapterId:string}}){
@@ -40,6 +47,40 @@ export async function PATCH(req:NextRequest,{params}:{params:{courseId:string, c
                 ...values,
             }
         });
+        console.log(values)
+        if (values.videoUrl) {
+            const existingMuxData = await db.muxData.findFirst({
+                where: {
+                    chapterId: params.chapterId
+                }
+            });
+
+            if (existingMuxData) {
+                await video.assets.delete(existingMuxData.assetId);
+                await db.muxData.delete({
+                    where: {
+                        id: existingMuxData.id,
+                    }
+                });
+
+            }
+            console.log(values.videoUrl)
+            const asset = await video.assets.create({
+                input: values.videoUrl,
+                playback_policy: ["public"],
+                test: false,
+            });
+            console.log("eee",asset)
+
+            await db.muxData.create({
+                data:{
+                    chapterId: params.chapterId,
+                    assetId: asset.id,
+                    playbackid: asset.playback_ids?.[0]?.id,
+                }
+            })
+
+        }
 
         return NextResponse.json(chapter);
     }catch(error){
