@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import { Pencil, PlusCircle, ImageIcon } from 'lucide-react';
+import { VideoIcon } from 'lucide-react';
 import{
     Form,
     FormControl,
@@ -24,24 +25,25 @@ import{ Input } from '@/components/ui/input';
 import toast from 'react-hot-toast';
 
 import { useRouter } from 'next/navigation';
-import { Course } from '@prisma/client';
+import { Course, MuxData,Chapter } from '@prisma/client';
 import { FileUpload } from '@/components/ui/file-uploader';
 
 
 interface ChapterVideoFormProps {
-    initialData: Course;
+    initialData: Chapter & {MuxData?: MuxData | null};
     courseId: string;
+    chapterId: string;
 };
 
 const formSchema = z.object({
-    imageUrl: z.string().min(1, {
+    videoUrl: z.string().min(1, {
         message: "Image is required",
     }),
 
 });
 
 
-const ChapterVideoForm = ({initialData, courseId} : ChapterVideoFormProps) => {
+const ChapterVideoForm = ({initialData, courseId, chapterId} : ChapterVideoFormProps) => {
 
     const router = useRouter();
 
@@ -51,20 +53,20 @@ const ChapterVideoForm = ({initialData, courseId} : ChapterVideoFormProps) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {imageUrl:initialData?.imageUrl || "",},
+        defaultValues: {videoUrl:initialData?.videoUrl || "",},
     });
 
     const { isSubmitting, isValid } = form.formState;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            await axios.patch(`/api/courses/${courseId}`,values);
-            toast.success("Course is updated");
+            await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`,values);
+            toast.success("Chapter is updated");
             toggleEdit();
             router.refresh();
         }catch(error) {
             console.log("something went wrong", error)
-            toast.error("Failed to update the course")
+            toast.error("Failed to update the Chapter")
         }
     }
 
@@ -74,21 +76,21 @@ const ChapterVideoForm = ({initialData, courseId} : ChapterVideoFormProps) => {
     <div className='border mt-6 bg-slate-200 rounded-md p-2'>
 
         <div className='font-medium flex items-center justify-between'>
-            Image
+            Chapter Video
             <Button onClick={toggleEdit} className = "hover:bg-transparent" variant="ghost">
                 {isEditing && (
                     <>Cancel</>
                 )}
-                { !isEditing && !initialData.imageUrl &&(
+                { !isEditing && !initialData.videoUrl &&(
                     <>
                     <PlusCircle className='h-4 w-4 mr-1' />
-                    Add an image
+                    Add an Video
                     </>
                 )}
-                { !isEditing && initialData.imageUrl && (
+                { !isEditing && initialData.videoUrl && (
                     <>
                     <Pencil  className='h-4 w-4' />
-                    Edit Image
+                    Edit Video
                     </>
                 )}
                 
@@ -96,9 +98,9 @@ const ChapterVideoForm = ({initialData, courseId} : ChapterVideoFormProps) => {
             
         </div>
         {!isEditing && (
-            !initialData.imageUrl ? (
+            !initialData.videoUrl ? (
                 <div className='flex items-center justify-center h-60'>
-                    <ImageIcon className='h-3 w-3'/>
+                    <VideoIcon className='h-24 w-24'/>
                 </div>
             ) : (
                 <div className='relative aspect-video mt-2'>
@@ -107,9 +109,9 @@ const ChapterVideoForm = ({initialData, courseId} : ChapterVideoFormProps) => {
                     fill
                     priority
                     placeholder='blur'
-                    blurDataURL={initialData.imageUrl}
+                    blurDataURL={initialData.videoUrl}
                     className="object-cover rounded-md"
-                    src={initialData.imageUrl}
+                    src={initialData.videoUrl}
                     />
                 </div>
             )
@@ -117,19 +119,25 @@ const ChapterVideoForm = ({initialData, courseId} : ChapterVideoFormProps) => {
         {isEditing && (
             <div>
                 <FileUpload
-                    endpoint="courseImage"
+                    endpoint="chapterVideo"
                     
                     onChange={(url) => {
                         if(url) {
-                            onSubmit({imageUrl: url});
+                            onSubmit({videoUrl: url});
                         }
                     }}
                 />
                 <div>
-                    16:9 ratio recommended
+                    {/* 16:9 ratio recommended */}
                 </div>
             </div>
+            
         )}
+        {initialData.videoUrl && !isEditing && (
+                <div className='italic text-center'>
+                    Videos can take a few minutes to process. Refresh the page if video does not appear. 
+                </div>
+            )}
         {/* --- {initialData.title} --- {courseId} */}
     </div>
   )

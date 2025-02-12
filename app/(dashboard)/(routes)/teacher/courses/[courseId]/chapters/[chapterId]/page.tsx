@@ -37,7 +37,7 @@ const EditChapterPage = async ({ params }:
     )
     return(
       <div className='p-5 w-9/12'>
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center grid-cols-2 justify-between'>
           <div className='w-full'>
           <Link className="flex items-center text-base hover:opacity-50" href={`/teacher/courses/${params.courseId}`}>
           
@@ -91,6 +91,7 @@ const EditChapterPage = async ({ params }:
                     <div>
           <ChapterVideoForm 
           initialData={chapter}
+          chapterId={params.chapterId}
           courseId={params.courseId}
           />
          </div>
