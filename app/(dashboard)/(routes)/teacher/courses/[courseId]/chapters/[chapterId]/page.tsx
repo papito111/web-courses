@@ -35,75 +35,63 @@ const EditChapterPage = async ({ params }:
       }
     }
     )
-    return(
-      <div className='p-5 w-9/12'>
-        <div className='flex items-center grid-cols-2 justify-between'>
-          <div className='w-full'>
+    return (
+      <div className='p-1 w-11/12 mx-auto'>
+        <div className='flex items-center justify-between'>
           <Link className="flex items-center text-base hover:opacity-50" href={`/teacher/courses/${params.courseId}`}>
-          
-         <ArrowLeft className='h-4 w-4 mr-2'/>
-         Back to chapter setup
-         </Link >
-         <div>
-          <h1 className='font-bold text-3xl py-2 text-center'>Chapter Creation</h1>
-         </div>
-         <div>
-          
-         <div className='flex mt-5 items-center gap-x-2'>
-                        <IconBadge icon={LayoutDashboard} />
-                        <h2 className='text-xl'>
-                            Customize your chapter
-                        </h2>
-                    </div>
-                    
-         <ChapterTitle
-         initialData={chapter}
-         chapterId={params.chapterId}
-         courseId={params.courseId}
-         />
-         <ChapterDescriptionForm 
-         initialData={chapter}
-         chapterId={params.chapterId}
-         courseId={params.courseId}
-         />
-         </div>
-         <div>
-         <div className='flex mt-5 items-center gap-x-2'>
-                        <IconBadge icon={Eye} />
-                        <h2 className='text-xl'>
-                            Access Settings
-                        </h2>
-                    </div>
-         </div>
-         <div>
-          <ChapterAccessForm 
-          initialData={chapter}
-          chapterId={params.chapterId}
-          courseId={params.courseId}/>
-         </div>
-         <div>
-         <div className='flex mt-5 items-center gap-x-2'>
-                        <IconBadge icon={Video} />
-                        <h2 className='text-xl'>
-                            Add your Video
-                        </h2>
-                    </div>
-                    <div>
-          <ChapterVideoForm 
-          initialData={chapter}
-          chapterId={params.chapterId}
-          courseId={params.courseId}
-          />
-         </div>
-          </div>
+            <ArrowLeft className='h-4 w-4 mr-2' />
+            Back to chapter setup
+          </Link>
         </div>
         <div>
-
+          <h1 className='font-bold text-3xl py-2 text-center'>Chapter Creation</h1>
         </div>
-
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+          <div>
+            <div className='flex mt-5 items-center gap-x-2'>
+              <IconBadge icon={LayoutDashboard} />
+              <h2 className='text-xl'>
+                Customize your chapter
+              </h2>
+            </div>
+            <ChapterTitle
+              initialData={chapter}
+              chapterId={params.chapterId}
+              courseId={params.courseId}
+            />
+            <ChapterDescriptionForm
+              initialData={chapter}
+              chapterId={params.chapterId}
+              courseId={params.courseId}
+            />
+            <div className='flex mt-5 items-center gap-x-2'>
+              <IconBadge icon={Eye} />
+              <h2 className='text-xl'>
+                Access Settings
+              </h2>
+            </div>
+            <ChapterAccessForm
+              initialData={chapter}
+              chapterId={params.chapterId}
+              courseId={params.courseId}
+            />
+          </div>
+          <div>
+            <div className='flex mt-5 items-center gap-x-2'>
+              <IconBadge icon={Video} />
+              <h2 className='text-xl'>
+                Add your Video
+              </h2>
+            </div>
+            <ChapterVideoForm
+              initialData={chapter}
+              chapterId={params.chapterId}
+              courseId={params.courseId}
+            />
+          </div>
         </div>
       </div>
-    )
-    }
-
-export default EditChapterPage;
+    );
+  }
+  
+  export default EditChapterPage;
