@@ -1,13 +1,13 @@
 "use client"
 
+
 import { AlertDialog,
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogTitle,
     AlertDialogDescription, 
-    AlertDialogTrigger} from "@radix-ui/react-alert-dialog";
-import { AlertDialogFooter, AlertDialogHeader } from "../ui/alert-dialog";
+    AlertDialogTrigger,AlertDialogFooter, AlertDialogHeader } from "../ui/alert-dialog";
 
 
 interface ConfirmModalProps {
@@ -33,7 +33,7 @@ export const ConfirmModal = ({
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction onClick={onConfirm}>
-                        Cancel
+                        Continue
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
