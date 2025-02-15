@@ -10,6 +10,82 @@ const { video } = new Mux({
     tokenSecret: process.env.MUX_TOKEN_SECRET!,
 });
 
+export async function DELETE(req:NextRequest,{params}:{params:{courseId:string, chapterId:string}}) {
+
+    try {
+        const {userId} = getAuth(req);
+
+        if (!userId) {
+            return new NextResponse("Unauthorized", { status: 401 });
+        }
+
+        const ownCourse = await db.course.findUnique({
+            where: {
+                id: params.courseId,
+                userId
+            },
+        });
+
+        if(!ownCourse){
+            return new NextResponse("Unathoarrized",{status:401})
+        }
+
+        const chapter = await db.chapter.findUnique({
+            where:{
+                id:params.chapterId,
+                courseId: params.courseId,
+            }
+        })
+        if(!chapter){
+            return new NextResponse("Not found",{status:404})
+        }
+
+        if(chapter.videoUrl) {
+            const existingMuxData = await db.muxData.findFirst({
+                where:{
+                    chapterId: params.chapterId
+                }
+            });
+            if (existingMuxData) {
+                                // await video.assets.del(existingMuxData.assetId);
+                await db.muxData.delete({
+                    where: {
+                        id:existingMuxData.id
+                    }
+                })
+
+            }
+        }
+        const deletedChapter = await db.chapter.delete({
+                where:{
+                    id:params.chapterId
+                }
+            });
+        
+        const publishedChaptersInCourse = await db.chapter.findMany({
+            where: {
+                id:params.courseId,
+                isPublished:true,
+            }
+        });
+
+        if(!publishedChaptersInCourse.length) {
+            await db.course.update({
+                where: {
+                    id:params.courseId
+                },
+                data: {
+                    isPublished:false,
+                }
+            })
+        }
+        return NextResponse.json(deletedChapter);
+    } catch(error) {
+        console.log("[dekleting_id",error)
+        return new NextResponse("internal error",{status:500})
+    }
+    
+}
 
 
 export async function PATCH(req:NextRequest,{params}:{params:{courseId:string, chapterId:string}}){

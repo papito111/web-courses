@@ -20,9 +20,30 @@ export const ChapterActions = ({
     disabled, chapterId, courseId, isPublished
 }:ChapterActionsProps
 ) => {
+    
     const router = useRouter();
     const [isLoading,SetIsLoading] = useState(false);
 
+
+    const onClick = async () => {
+        try{
+            SetIsLoading(true);
+            if (isPublished) {
+                await axios.patch(`api/courses/${courseId}chapters/${chapterId}/unpublish`);
+                toast.success("Chapter is unpublished");
+            } else{
+                await axios.patch(`api/courses/${courseId}chapters/${chapterId}/publish`);
+                toast.success("Chapter is published");
+
+            }
+        }catch{
+            toast.error("Something went wrong");
+
+        } finally {
+            SetIsLoading(false)
+        }
+    }
+    
     const onDelete = async() => {
         try{
             SetIsLoading(true);
