@@ -9,10 +9,13 @@ import ChapterTitle from './_components/chapter-title-form';
 import { ArrowLeft, Camera, CameraIcon, Video } from 'lucide-react';
 import Link from 'next/link';
 import { LayoutDashboard, Eye } from 'lucide-react';
+import { ChapterActions } from './_components/chapter-actionx';
 
 import { IconBadge } from '@/components/icon-badge';
 import ChapterAccessForm from './_components/chapter-access-form';
 import ChapterVideoForm from './_components/chapter-video-form';
+
+import { Banner } from '@/components/banner';
 
 const EditChapterPage = async ({ params }:
     {
@@ -33,11 +36,34 @@ const EditChapterPage = async ({ params }:
       include: {
         muxData: true
       }
-    }
-    )
+    },
+  )
+    const requiredFields = [
+      chapter?.title,
+      chapter?.description,
+      chapter?.videoUrl,
+      
+
+    ];
+    const totalFields = requiredFields.length;
+    const completedFields = requiredFields.filter(Boolean).length;
+    const completionText =`(${completedFields}/${totalFields})`
+
+    const isComplete = requiredFields.every(Boolean);
+
+    
     return (
+      <div>
+        {!chapter?.isPublished && (
+          <Banner 
+        label=' This chapter is unpublished. It will note be visible in the course'
+        
+        />
+        )}
+      
       <div className='p-1 w-11/12 mx-auto'>
-        <div className='flex items-center justify-between'>
+        
+        <div className='flex items-center justify-between py-2'>
           <Link className="flex items-center text-base hover:opacity-50" href={`/teacher/courses/${params.courseId}`}>
             <ArrowLeft className='h-4 w-4 mr-2' />
             Back to chapter setup
@@ -45,6 +71,21 @@ const EditChapterPage = async ({ params }:
         </div>
         <div>
           <h1 className='font-bold text-3xl py-2 text-center'>Chapter Creation</h1>
+        
+        <div className='text-center italic text-sm py-2'>
+          Complete all fields {completionText}
+        </div>
+        <ChapterActions 
+          disabled={!isComplete}
+          courseId = {params.courseId}
+          chapterId = {params.chapterId}
+          isPublished = {chapter?.isPublished}
+          />
+        
+        
+        <div>
+          
+        </div>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <div>
@@ -90,6 +131,7 @@ const EditChapterPage = async ({ params }:
             />
           </div>
         </div>
+      </div>
       </div>
     );
   }
