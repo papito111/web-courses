@@ -114,7 +114,7 @@ const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVideoForm
                     </div>
                 </div>
             )}
-            {!initialData.videoUrl && !isEditing && (
+            {!initialData.videoUrl && isEditing && (
                 <div className='italic text-sm text-center'>
                     Videos can take a few minutes to process. Refresh the page if video does not appear.
                 </div>

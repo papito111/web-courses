@@ -5,10 +5,10 @@ import { NextRequest } from "next/server";
 
 import {Mux} from "@mux/mux-node"
 
-const { video } = new Mux(
-    process.env.MUX_TOKEN_ID!,
-    process.env.MUX_TOKEN_SECRET!,
-);
+const { video } = new Mux({
+    tokenId: process.env.MUX_TOKEN_ID!,
+    tokenSecret: process.env.MUX_TOKEN_SECRET!,
+});
 
 
 
@@ -56,7 +56,7 @@ export async function PATCH(req:NextRequest,{params}:{params:{courseId:string, c
             });
 
             if (existingMuxData) {
-                await video.assets.delete(existingMuxData.assetId);
+                // await video.assets.del(existingMuxData.assetId);
                 await db.muxData.delete({
                     where: {
                         id: existingMuxData.id,
