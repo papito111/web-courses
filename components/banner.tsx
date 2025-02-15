@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { IconBadge } from "./icon-badge";
 
 const bannerVariants = cva(
-    "border  p-3 text-sm text-center flex items-center w-full",
+    "border -mt-9 pb-4 pt-3 text-sm text-center justify-start  items-center w-full",
     {
         variants:{
             variant: {
@@ -32,12 +32,9 @@ export const Banner = (
 ) => {
     const Icon = iconMap[variant || "warning"]
     return (
-        <div className={cn(bannerVariants({variant}))}>
-
-        <Icon className = "h-4 w-4" />
-        <div>{label}</div>
-
+        <div className={cn(bannerVariants({variant}))} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Icon className="h-6 w-6 mr-2" />
+            <div>{label}</div>
         </div>
-
     )
 }
