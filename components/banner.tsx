@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { IconBadge } from "./icon-badge";
 
 const bannerVariants = cva(
-    "border -mt-9 pb-4 pt-3 text-sm text-center justify-start  items-center w-full",
+    "border -mt-9 pb-4 pt-3 px-0 mx-0 text-sm text-center justify-start  items-center w-full",
     {
         variants:{
             variant: {
