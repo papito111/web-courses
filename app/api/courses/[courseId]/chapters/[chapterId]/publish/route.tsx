@@ -45,12 +45,21 @@ export async function PATCH(req:NextRequest,{params}:{params:{courseId:string, c
         return new NextResponse("Missing data",{status:400})
 
         }
+
+        const publishedChapter = await db.chapter.update({
+            where: {
+                id:params.chapterId,
+                courseId: params.courseId
+            },
+            data:{
+                isPublished: true,
+            }
+        })
+        return NextResponse.json(publishedChapter)
     }catch(error){
         console.log("published incorecctly",error)
         return new NextResponse("Internal error",{status:500})
         
-
-    }finally{
 
     }
 }

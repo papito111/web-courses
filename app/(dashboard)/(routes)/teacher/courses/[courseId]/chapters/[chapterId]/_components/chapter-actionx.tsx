@@ -29,11 +29,13 @@ export const ChapterActions = ({
         try{
             SetIsLoading(true);
             if (isPublished) {
-                await axios.patch(`api/courses/${courseId}chapters/${chapterId}/unpublish`);
+                await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/unpublish`);
                 toast.success("Chapter is unpublished");
             } else{
-                await axios.patch(`api/courses/${courseId}chapters/${chapterId}/publish`);
+                await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/publish`);
                 toast.success("Chapter is published");
+            router.refresh()
+
 
             }
         }catch{
@@ -63,7 +65,7 @@ export const ChapterActions = ({
         <div className="flex items-center gap-x-2">
             
             <Button
-            onClick={()=>{}}
+            onClick={onClick}
             disabled = {disabled || isLoading}
             variant="outline"
             size="sm"
