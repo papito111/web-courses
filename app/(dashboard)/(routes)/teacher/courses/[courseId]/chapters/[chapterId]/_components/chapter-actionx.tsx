@@ -31,10 +31,12 @@ export const ChapterActions = ({
             if (isPublished) {
                 await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/unpublish`);
                 toast.success("Chapter is unpublished");
+                router.refresh()
+
             } else{
                 await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/publish`);
                 toast.success("Chapter is published");
-            router.refresh()
+                router.refresh()
 
 
             }
