@@ -11,7 +11,8 @@ const Dashboard = ({children}:{children:React.ReactNode}) => {
       <main className="w-full">
         <Navbar>
         </Navbar>
-        <div className="h-full flex items-center justify-center">{children}
+        <div className="h-full flex items-center justify-center">
+          {children}
             </div>
       </main>
      

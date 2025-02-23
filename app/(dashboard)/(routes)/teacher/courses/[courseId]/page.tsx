@@ -18,7 +18,10 @@ import {
 import PriceForm from './_components/price-form';
 import AttachmentsForm from './_components/attachments-form';
 import ChapterForm from './_components/chapters-form';
+import { boolean } from 'zod';
+import { Banner } from '@/components/banner';
 
+import { Actions } from './_components/actions';
 
 const CourseIdPage = async ({ params }:
     {
@@ -76,19 +79,37 @@ const CourseIdPage = async ({ params }:
     const completedFields = requiredFields.filter(Boolean).length; //tu bedzie lista tych requiered field ktora nie jest falszem
     const completionText = `${completedFields}/${totalFields}`
 
+    const isComplete = requiredFields.every(Boolean);
     return (
-        <div className='p-1 w-11/12 md:w-11/12 '>
-            <div className='flex items-center justify-between'>
-                <div className='flex flex-col gap-y-2'>
+        <>
+
+
+          
+        <div className='p-1  w-auto md:w-11/12 '>
+        {!course.isPublished &&(
+            <Banner 
+            label='This course is unpublished. It will not be visible for the students'
+            />
+        )}
+         <div className='flex text-center items-center py-3 justify-center'>
+                <div className='flex flex-col  gap-y-2'>
                     <h1 className='text-2xl font-semibold'>
                         Course setup: {course.title}
                     </h1>
-                    <span className='text-sm text-slate-700'>
+                    <span className='text-sm text-center text-slate-700'>
                         Complete all fields({completionText})
                     </span>
+                    <div className='flex'>
+                <Actions 
+                disabled={!isComplete}
+                courseId={params.courseId}
+                isPublished={course.isPublished} />
                 </div>
+                </div>
+                
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-6'> 
+            
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-10'> 
 
                  {/* //tu moge zmienic bo teraz mi grid cols na 1 lub 2 troche ucieka na lewoo */}
                 <div>
@@ -174,6 +195,7 @@ const CourseIdPage = async ({ params }:
                 
             </div>           
         </div>
+        </>
     )
 }
 
