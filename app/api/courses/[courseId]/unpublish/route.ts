@@ -18,40 +18,30 @@ export async function PATCH(req:NextRequest,{params}:{params:{courseId:string, c
                 id: params.courseId,
                 userId
             },
-            include: {
-                chapters:{
-                    include:{
-                        muxData: true
-                    }
-                }
-            }
+            
         })
         if (!course) {
-            return new NextResponse("No course to be published", { status: 401 });
+            return new NextResponse("No course to be unpublished", { status: 401 });
         }
 
-        const hasPublishedChapter = course.chapters.some((chapter) => chapter.isPublished);
         
-        if(!course.title || !course.description || !course.imageUrl || !course.categoryId || !hasPublishedChapter ){
-            return new NextResponse ("missing fields",{status:401});
-        }
 
-        const publishedCourse = await db.course.update({
+        const unpublishedCourse = await db.course.update({
             where:{
                 id:params.courseId,
                 userId
             },
             data: {
-                isPublished: true
+                isPublished: false
             }
         }
             
         )
 
-        return NextResponse.json(publishedCourse)
+        return NextResponse.json(unpublishedCourse)
 
     }catch(error){
-        return new NextResponse("some error in chapter title",{status:500})
+        return new NextResponse("some error in course unpublishing",{status:500})
 
     }
 }
