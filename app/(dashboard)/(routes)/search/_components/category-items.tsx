@@ -2,6 +2,7 @@
  
 import {IconType} from "react-icons"
 import { cn } from "@/lib/utils"
+import { usePathname, useSearchParams,useRouter } from "next/navigation"
 interface CategoryItemProps {
     label: string,
     value?: string,
@@ -12,6 +13,12 @@ interface CategoryItemProps {
 export const CategoryItem = (
     {label, value, icon:Icon}: CategoryItemProps
 ) => {
+    const pathname = usePathname();
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const currentCategoryId = searchParams.get("categoryId");
+    const currentTitle = searchParams.get("title");
     return(
         <button
         className={cn(
