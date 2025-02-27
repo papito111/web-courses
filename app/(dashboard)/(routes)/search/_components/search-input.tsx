@@ -27,12 +27,18 @@ export const SearchInput = () => {
 
     return(
         <div className="-mt-10 flex justify-center mx-auto  items-center text-center">
+            <Search className="gap-x-2 mr-2"/>
+
             <Input
                 className="bg-gray-200  p-2 items-center rounded-lg w-full max-w-md"
                 placeholder="Szukaj..."
                 onChange={(e)=>setValue(e.target.value)}
                 value={value}
-            />
+                
+            >
+
+            </Input>
+
         </div>
     )
 }
