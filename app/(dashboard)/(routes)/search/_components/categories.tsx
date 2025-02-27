@@ -21,14 +21,14 @@ export const Categories = (
     {items}:CategoryProps
 ) => {
     return(
-        <div className="flex gap-x-2 items-center pb-2">
+        <div className="flex justify-center gap-x-2 items-center pb-2 overflow-x-auto">
             {items.map(
-                (item)=>(<CategoryItem 
-                    key={item.id}
-                    label={item.name}
-                    icon={iconMap[item.name]}
-                    value={item.id}
-                    />
+            (item)=>(<CategoryItem 
+                key={item.id}
+                label={item.name}
+                icon={iconMap[item.name]}
+                value={item.id}
+                />
         ))}
         </div>
     )
