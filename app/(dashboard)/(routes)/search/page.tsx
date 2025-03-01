@@ -47,7 +47,6 @@ const SearchPage = async ( { searchParams }: SearchPageProps) => {
             <div className="flex items-center mb-4">
                 <SearchInput />
             </div>
-            <p>{userId}, {searchParams.title}, {searchParams.categoryId}</p>
             <div>
                 <Categories items={categories} />
             </div>
