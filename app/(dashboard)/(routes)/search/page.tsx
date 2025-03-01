@@ -17,21 +17,11 @@ interface SearchPageProps {
 
 const SearchPage = async ( { searchParams }: SearchPageProps) => {
 
-    // const res = await fetch(`/api/user`, { cache: "no-store" });
     const { userId } = await auth();
-    // if (res.status === 401) {
-    //     return <p className="text-red-500">Unauthorized</p>;
-    // }
-
-    // if (!res.ok) {
-    //     return <p className="text-red-500">Error fetching user data</p>;
-    // }
-
-    // const { userId } = await res.json();
-
+   
     if(!userId){
         return redirect("/")
-        // return new NextResponse("unathoarize",{status:401})
+
     }
     const categories = await db.category.findMany({
         orderBy: {
@@ -39,19 +29,20 @@ const SearchPage = async ( { searchParams }: SearchPageProps) => {
         }
     });
     const courses = await GetCourses({
-        userId, 
-        ...searchParams
-    })
+        userId,
+        title: searchParams.title,
+        categoryId: searchParams.categoryId || undefined
+    });
     return (
-        <div className="p-5 w-full mx-auto">
-            <div className="flex items-center mb-4">
+        <div className="p-5 w-full mx-auto ">
+            <div className="flex items-center mb-6">
                 <SearchInput />
             </div>
-            <div>
+            <div className="mb-6">
                 <Categories items={categories} />
             </div>
             {/* <GetCourses /> */}
-            <div>
+            <div >
                 <CourseList items={courses}/>
             </div>
         </div>
