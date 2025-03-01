@@ -8,17 +8,34 @@ type CourseWithProgressWithCategory = Course & {
 };
 
 interface CourseListProps {
-    items: CourseWithProgressWithCategory
+    items: CourseWithProgressWithCategory[];
 }
 
-export const CourseList = () => {
+export const CourseList = ({items}: CourseListProps) => {
 
     return(
         <div>
-        {items.map((item)=>
+            <div>
+        {items.map((item)=>(
+            <CourseCard
+            key = {item.id}
+            id = {item.id}
+            title = {item.title}
+            imageUrl = {item.imageUrl}
+            chaptersLength = {item.chapters.length}
+            price={item.price}
+            progress={item.progress}
+            category={item?.category?.name} 
+            />
         <div key={item.id}>
             {item.title}
         </div>
+        ))}
+        </div>
+        {items.length === 0 &&(
+            <div>
+                No courses
+            </div>
         )}
         </div>
     )

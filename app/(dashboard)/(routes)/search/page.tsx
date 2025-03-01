@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth,getAuth } from "@clerk/nextjs/server";
 import { title } from "process";
 import { redirect } from "next/navigation";
+import { CourseList } from "./_components/courses-list";
 
 interface SearchPageProps {
     searchParams: {
@@ -51,6 +52,9 @@ const SearchPage = async ( { searchParams }: SearchPageProps) => {
                 <Categories items={categories} />
             </div>
             {/* <GetCourses /> */}
+            <div>
+                <CourseList items={courses}/>
+            </div>
         </div>
     );
 }
