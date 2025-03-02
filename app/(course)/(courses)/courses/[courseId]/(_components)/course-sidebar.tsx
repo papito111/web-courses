@@ -14,14 +14,14 @@ interface CourseSidebarProps {
 }
 
 const CourseSidebar = async ({course, progressCount}:CourseSidebarProps) => {
-  
+    let purchase = true;
     const { userId } = await auth();
         
             if (!userId) {
                 return redirect("/")
             }
   
-  
+            
     return (
         <div className='h-full border-r flex flex-col overflow-y-auto'>
             <div className='p-8 flex flex-col border'>
