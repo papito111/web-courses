@@ -13,10 +13,12 @@ export const NavbarRoutes = () => {
   const router = useRouter();
 
   const isTeacherPage = pathname?.startsWith("/teacher");
-  const isLearnerPage = pathname?.includes("/chapter");
+  const isCoursePage = pathname?.includes("/courses");
+  const isSearchPage = pathname === "/search";
+
     return (
       <div className="flex gap-x-2 ml-auto">
-        {isTeacherPage || isLearnerPage ? (
+        {isTeacherPage || isCoursePage ? (
           <Link href="/">
           <Button className="mr-4 bg-slate-700" variant="ghost">
             <LogOut className="h-4 w-4 mr-2"></LogOut>

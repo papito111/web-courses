@@ -1,10 +1,10 @@
 "use client"
 
-import { CheckCircle, PlayCircle } from "lucide-react";
+import { CheckCircle, PlayCircle, Lock } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LockIcon } from "lucide-react";
+// import { LockIcon } from "lucide-react";
 
 
 interface CourseSidebarItemProps {
