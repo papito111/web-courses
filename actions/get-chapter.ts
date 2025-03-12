@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { Attachment, Chapter } from "@prisma/client";
-
+import { MuxData } from "@prisma/client";
 
 interface GetChapterProps {
     userId : string;
@@ -44,8 +44,8 @@ export const getChapter = async ({
             throw new Error("Chapter error")
         }
 
-        let muxData: { chapterId: string; id: string; assetId: string; playbackid: string | null; } 
-        | null = null;
+        let muxData: { chapterId: string; id: string; playbackid: string | null; assetId: string } | null = null;
+
         let  attachments: Attachment[] = [];
         let  nextChapter: Chapter | null =null;
         if(purchase) {
@@ -56,7 +56,7 @@ export const getChapter = async ({
             })
         }
 
-        if( chapter.isFree || purchase) {
+        if( !chapter.isFree || purchase) {
             muxData = await db.muxData.findUnique({
                 where: {
                     chapterId: chapterId,

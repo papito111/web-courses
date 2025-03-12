@@ -50,7 +50,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             title ={chapter?.title}
             courseId={params.courseId}
             nextChapterId={nextChapter?.id}
-            playbackid={muxData?.playbackid ?? ""}
+            playbackid={muxData?.playbackid}
             isLocked={isLocked}
             completeOnEnd={completeOnEnd}
             
