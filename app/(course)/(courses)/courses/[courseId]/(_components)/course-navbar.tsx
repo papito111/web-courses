@@ -21,7 +21,10 @@ export const CourseNavbar = ({
     return(
         <div className="p-4 text-white  border-b h-full flex items-center bg-gray-900 shadow-sm">
             
-            {/* <CourseMobileSidebar /> */}
+            <CourseMobileSidebar 
+            course={course}
+            progressCount={progressCount}
+            />
             <NavbarRoutes />
         </div>
     )
