@@ -41,21 +41,23 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
     const completeOnEnd = !!purchase && !userProgress?.isCompleted;
     return (
         <div>
-            <p>User ID: {userId ?? "Loading..."}</p>
+            {/* <p>User ID: {userId ?? "Loading..."}</p>
             <p>Course ID: {params.courseId}</p>
-            <p>Chapter ID: {params.chapterId}</p>
-            <div>{chapter?.description}</div>
+            <p>Chapter ID: {params.chapterId}</p> */}
             <VideoPlayer 
             chapterId = {params.chapterId}
-            title ={chapter?.title}
+            title ={chapter?.title!}
             courseId={params.courseId}
             nextChapterId={nextChapter?.id}
-            playbackid={muxData?.playbackid}
+            playbackid={muxData?.playbackid!}
             isLocked={isLocked}
             completeOnEnd={completeOnEnd}
             
             />
+            <div>{chapter?.description}</div>
+
         </div>
+        
     );
 };
 
