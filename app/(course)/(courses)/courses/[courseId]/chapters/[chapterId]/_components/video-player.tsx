@@ -32,12 +32,12 @@ export const VideoPlayer = ({
 }:VideoPlayerProps) => {
 
     return (
-        <div className="max-w-3xl mx-auto p-4">
-          <header className="text-center mb-6">
+        <div className="max-w-6xl mx-auto p-2">
+          <header className="text-center mb-3">
             <h1 className="text-3xl font-bold">{title}</h1>
-            <p className="text-sm text-gray-500">Playback ID: {playbackid}</p>
+            {/* <p className="text-sm text-gray-500">Playback ID: {playbackid}</p> */}
           </header>
-          <section className="border border-gray-300 rounded-lg p-4 bg-gray-50">
+          <section className="border border-gray-300 shadow-md rounded-lg p-3 bg-gray-50">
             <MuxPlayer playbackId={playbackid} />
           </section>
         </div>
