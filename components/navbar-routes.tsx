@@ -4,7 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { UserButton } from '@clerk/nextjs'
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import { Ghost,  LogOut } from "lucide-react";
+import { Ghost,  Home,  LogOut } from "lucide-react";
 import { url } from "inspector";
 import Link from "next/link";
 
@@ -18,6 +18,12 @@ export const NavbarRoutes = () => {
 
     return (
       <div className="flex gap-x-2 ml-auto">
+        <Link href="/search">
+          <Button className="mr-4 bg-slate-700" variant="ghost">
+            <Home className="h-4 w-4 mr-2"></Home>
+            Courses
+          </Button>
+          </Link>
         {isTeacherPage || isCoursePage ? (
           <Link href="/">
           <Button className="mr-4 bg-slate-700" variant="ghost">

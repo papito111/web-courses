@@ -33,13 +33,13 @@ export const VideoPlayer = ({
 
     return (
         <div className="max-w-6xl mx-auto p-2">
-          <header className="text-center mb-3">
-            <h1 className="text-3xl font-bold">{title}</h1>
-            {/* <p className="text-sm text-gray-500">Playback ID: {playbackid}</p> */}
-          </header>
+          
           <section className="border border-gray-300 shadow-md rounded-lg p-3 bg-gray-50">
             <MuxPlayer playbackId={playbackid} />
           </section>
+          <header className="text-center mt-2 mb-2">
+            {/* <p className="text-sm text-gray-500">Playback ID: {playbackid}</p> */}
+          </header>
         </div>
       );
       

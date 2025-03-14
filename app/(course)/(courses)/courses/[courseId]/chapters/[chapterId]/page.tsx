@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { VideoPlayer } from "./_components/video-player";
 import { Banner } from "@/components/banner";
+import CourseEnrollButton from "./_components/course-enroll-button";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
     const { userId } = await auth();
@@ -39,6 +40,21 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
                 isLocked={isLocked}
                 completeOnEnd={completeOnEnd}
             />
+            
+            {!purchase && (
+                <div className="flex justify-between gap-x-12 mx-12">
+            <h1 className="text-3xl font-bold">{chapter?.title}</h1>
+                    
+                    <CourseEnrollButton
+                    courseId={params.courseId}
+                    price={course?.price!}
+                />
+                
+                </div>
+                
+                
+                
+            )}
             <div className="flex mx-2 rounded-md shadow-md bg-gray-50 justify-center items-center p-10">
                 <div className="items-center text-xl" dangerouslySetInnerHTML={{ __html: chapter?.description ?? "" }} />
             </div>
