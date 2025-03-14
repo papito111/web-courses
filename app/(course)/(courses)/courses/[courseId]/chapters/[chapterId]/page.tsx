@@ -43,7 +43,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             />
             <Separator className="my-2"/>
 
-            <div className="flex justify-between gap-x-12 mx-12">
+            <div className="flex justify-between gap-x-12 mx-5">
             <h1 className="text-3xl font-bold">{chapter?.title}</h1>
             {!purchase && (
                 
@@ -58,24 +58,38 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
                 
             )}
             </div>
-            <Separator className=""/>
+            <Separator className="my-2"/>
             
             <div className="flex mx-2 rounded-md shadow-md bg-gray-50 justify-center items-center p-10">
                 <div className="items-center text-xl" dangerouslySetInnerHTML={{ __html: chapter?.description ?? "" }} />
             </div>
             <div>
-                <div>
+            <Separator className="my-2"/>
+
+                <div className="text-2xl text-center p-3 font-semibold">
                     Attachments
                 </div>
-                {attachments.length  &&(
-                    <div className="w-auto">
-                    {attachments.map((attachment) => (
-                        <a href={attachment.url} key={attachment.id} target="_blank" rel="noopener noreferrer">
-                            {attachment.name }<br></br>
-                        </a>
-                    ))}
-                </div>
+            <Separator className="my-2"/>
+
+                {attachments.length > 0 && (
+                    <div className="flex flex-col p-5  bg-gray-50 rounded-md shadow-md">
+                        {attachments.map((attachment) => (
+                            <a
+                                className="truncate break-words mb-2"
+                                href={attachment.url}
+                                key={attachment.id}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {attachment.name}
+                            </a>
+                        ))}
+
+                    </div>
                 )}
+            <Separator className="my-2"/>
+
+                
             </div>
         </div>
     );
