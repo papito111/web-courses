@@ -9,7 +9,7 @@ interface CourseEnrollButtonProps{
 
 const CourseEnrollButton = ({price, courseId}:CourseEnrollButtonProps) => {
   return (
-    <div className="flex w-full md:w-auto items-center justify-center mb-3">
+    <div className="flex w-full md:w-auto items-center justify-center mb-2">
         <Button className="text-lg">
             Enroll for {formatPrice(price)}
         </Button>

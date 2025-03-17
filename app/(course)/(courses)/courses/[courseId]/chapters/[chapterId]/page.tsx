@@ -41,10 +41,9 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
                 isLocked={isLocked}
                 completeOnEnd={completeOnEnd}
             />
-            <Separator className="my-2"/>
 
-            <div className="flex justify-between gap-x-12 mx-5">
-            <h1 className="text-3xl font-bold">{chapter?.title}</h1>
+            <div className="flex justify-around mb-0 pb-0 gap-x-12  mx-5">
+            <h1 className="text-3xl font-bold">Opis rozdziału:</h1>
             {!purchase && (
                 
                     
@@ -58,7 +57,6 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
                 
             )}
             </div>
-            <Separator className="my-2"/>
             
             <div className="flex mx-2 rounded-md shadow-md bg-gray-50 justify-center items-center p-10">
                 <div className="items-center text-xl" dangerouslySetInnerHTML={{ __html: chapter?.description ?? "" }} />
