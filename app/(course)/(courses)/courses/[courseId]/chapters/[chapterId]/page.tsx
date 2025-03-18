@@ -22,7 +22,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
 
   const isLocked = !chapter?.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
-
+  console.log(attachments)
   return (
     <main className="md:w-11/12 max-w- mx-auto px-4 py-6 space-y-8">
       <section>
@@ -71,7 +71,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-600">Brak załączników.</p>
+          <p className="text-center text-gray-600">Brak dostępnych załączników.</p>
         )}
         <Separator className="my-4" />
       </section>
