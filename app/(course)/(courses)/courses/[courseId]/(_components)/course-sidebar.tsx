@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { Course, Chapter, UserProgress } from '@prisma/client';
 import CourseSidebarItem from './course-sidebar-item';
-
+import { db } from '@/lib/db';
 interface CourseSidebarProps {
     course: Course & {
         chapters: (Chapter & {
@@ -14,14 +14,20 @@ interface CourseSidebarProps {
 }
 
 const CourseSidebar = async ({course, progressCount}:CourseSidebarProps) => {
-    let purchase = true;
     const { userId } = await auth();
         
             if (!userId) {
                 return redirect("/")
             }
   
-            
+    const purchase = await db.purchase.findUnique({
+        where: {
+            userId_courseId: {
+                userId, 
+                courseId: course.id
+            }
+        }
+    })      
     return (
         <div className='h-full border-r flex flex-col overflow-y-auto'>
             <div className='p-8 flex flex-col border'>
@@ -38,8 +44,8 @@ const CourseSidebar = async ({course, progressCount}:CourseSidebarProps) => {
                     label = {chapter.title}
                     isCompleted= {!!chapter.userProgress?.[0]?.isCompleted}
                     courseId={course.id}
-                    // isLocked={!chapter.isFree  && !purchase}
-                    isLocked={!chapter.isFree}
+                    isLocked={!chapter.isFree  && !purchase}
+                    // isLocked={!chapter.isFree}
 
 
 

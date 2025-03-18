@@ -23,7 +23,7 @@ const CourseSidebarItem = ({
 
     const Icon = isLocked ? Lock : (isCompleted ? CheckCircle : PlayCircle);
 
-    console.log("Rendering:", label, "isLocked:", isLocked, "Icon:", Icon.name);
+    // console.log("Rendering:", label, "isLocked:", isLocked, "Icon:", Icon.name);
 
     const onClick = () => {
         if (!isLocked) {

@@ -1,11 +1,27 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
 
-export default clerkMiddleware({})
+const isPublicRoute = createRouteMatcher(["/api/webhook"]);
+
+export default clerkMiddleware((auth, req) => {
+  if (!isPublicRoute(req)) {
+    const authResult = auth.protect();
+    if (authResult instanceof NextResponse) {
+      return authResult;
+    }
+    // Obsłuż przypadek, gdy authResult nie jest NextResponse
+    // Na przykład, możesz przekierować użytkownika lub zwrócić błąd
+  }
+  return NextResponse.next();
+});
+
+
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
+    
+    // Pomijaj wewnętrzne pliki Next.js i wszystkie pliki statyczne, chyba że są w parametrach wyszukiwania
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
+    // Zawsze uruchamiaj dla tras API
     '/(api|trpc)(.*)',
   ],
 };
