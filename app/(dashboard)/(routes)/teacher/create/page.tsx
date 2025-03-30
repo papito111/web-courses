@@ -47,8 +47,8 @@ const CreatePage = () => {
   return (
     <div className='max-w-5xl mx-auto flex md:items-center justify-center h-full p-5'>
       <div>
-      <h1 className='text-2xl font-semibold '>Name your course</h1>
-      <p className='text-sm text-slate-500 my-1'>What's your course name?</p>
+      <h1 className='text-2xl font-semibold'>Name your course</h1>
+      <p className='text-sm text-slate-500 my-1'>What s your course name?</p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 mt-5'>
           <FormField 
