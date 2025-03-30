@@ -10,7 +10,7 @@ import TitleForm from './_components/title-form';
 import DescriptionForm from './_components/description-form';
 import ImageForm from './_components/image-form';
 import CategoryForm from './_components/category-form';
-
+import { getAuth } from '@clerk/nextjs/server';
 import {
     generateUploadButton,
     generateUploadDropzone,
@@ -28,13 +28,15 @@ const CourseIdPage = async ({ params }:
         params: { courseId: string }
     }) => {
     const reqHeaders = headers();
-    const { userId } = auth({ headers: reqHeaders });
+    // const { userId } = getAuth({ headers: reqHeaders });
+    const { userId } = await auth();
+    
     // to powyzej nie dziala
     // console.log(userId);
 
-    // if (!userId) {
-    //     redirect("/sign-in");
-    // }
+    if (!userId) {
+        redirect("/sign-in");
+    }
 
     const course = await db.course.findUnique({
         where: {

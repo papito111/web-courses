@@ -10,12 +10,13 @@ import { ArrowLeft, Camera, CameraIcon, Video } from 'lucide-react';
 import Link from 'next/link';
 import { LayoutDashboard, Eye } from 'lucide-react';
 import { ChapterActions } from './_components/chapter-actionx';
-
+import { Chapter } from '@prisma/client';
 import { IconBadge } from '@/components/icon-badge';
 import ChapterAccessForm from './_components/chapter-access-form';
 import ChapterVideoForm from './_components/chapter-video-form';
 
 import { Banner } from '@/components/banner';
+import { useRouter } from 'next/navigation';
 
 const EditChapterPage = async ({ params }:
     {
@@ -38,6 +39,9 @@ const EditChapterPage = async ({ params }:
       }
     },
   )
+  if(!chapter){
+    useRouter().push('/')
+  }
     const requiredFields = [
       chapter?.title,
       chapter?.description,
@@ -79,7 +83,8 @@ const EditChapterPage = async ({ params }:
           disabled={!isComplete}
           courseId = {params.courseId}
           chapterId = {params.chapterId}
-          isPublished = {chapter?.isPublished}
+          isPublished = {chapter?.isPublished ?? false}
+
           />
         
         
@@ -96,12 +101,12 @@ const EditChapterPage = async ({ params }:
               </h2>
             </div>
             <ChapterTitle
-              initialData={chapter}
+              initialData={chapter ?? { title: '' }}
               chapterId={params.chapterId}
               courseId={params.courseId}
             />
             <ChapterDescriptionForm
-              initialData={chapter}
+              initialData={chapter ?? { id: '', title: '', description: null, isPublished: false, createdAt: new Date(), updatedAt: new Date(), courseId: '', videoUrl: null, position: 0, isFree: false }}
               chapterId={params.chapterId}
               courseId={params.courseId}
             />
@@ -112,7 +117,7 @@ const EditChapterPage = async ({ params }:
               </h2>
             </div>
             <ChapterAccessForm
-              initialData={chapter}
+              initialData={chapter ?? { id: '', title: '', description: null, isPublished: false, createdAt: new Date(), updatedAt: new Date(), courseId: '', videoUrl: null, position: 0, isFree: false }}
               chapterId={params.chapterId}
               courseId={params.courseId}
             />
@@ -125,7 +130,7 @@ const EditChapterPage = async ({ params }:
               </h2>
             </div>
             <ChapterVideoForm
-              initialData={chapter}
+              initialData={chapter ?? { id: '', title: '', description: null, isPublished: false, createdAt: new Date(), updatedAt: new Date(), courseId: '', videoUrl: null, position: 0, isFree: false, muxData: null }}
               chapterId={params.chapterId}
               courseId={params.courseId}
             />
