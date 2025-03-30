@@ -24,7 +24,11 @@ import{ Input } from '@/components/ui/input';
 import toast from 'react-hot-toast';
 
 import { useRouter } from 'next/navigation';
-import { Course } from '@prisma/client';
+import { Course as PrismaCourse } from '@prisma/client';
+
+interface Course extends PrismaCourse {
+    isFree: boolean;
+}
 import { Editor } from '@/components/editor';
 import { cn } from '@/lib/utils';
 import { Preview } from '@/components/preview';
@@ -48,7 +52,7 @@ const ChapterAccessForm = ({initialData, courseId, chapterId} : ChapterAccessFor
 
     const[isEditing, setisEditing] = React.useState(false);
 
-    const toggleEdit = () => setisEditing((current) => !current); 
+        defaultValues: { isFree: initialData.isFree ?? false },
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),

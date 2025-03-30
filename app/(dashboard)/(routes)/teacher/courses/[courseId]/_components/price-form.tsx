@@ -86,7 +86,7 @@ const PriceForm = ({initialData, courseId} : PriceFormProps) => {
         </div>
         {!isEditing && (
             <p className='text-sm mt-2 text-center'>
-                 {formatPrice(initialData.price)}
+                 {formatPrice(initialData.price ?? 0)}
             </p>
         )}
         {isEditing && (

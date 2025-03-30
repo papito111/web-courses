@@ -52,7 +52,7 @@ export const ChaptersList: React.FC<ChaptersListProps> = ({
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId='chapters'>
+      {/* <Droppable droppableId='chapters'>
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {chapters.map((chapter, index) => (
@@ -91,7 +91,7 @@ export const ChaptersList: React.FC<ChaptersListProps> = ({
             {provided.placeholder}
           </div>
         )}
-      </Droppable>
+      </Droppable> */}
     </DragDropContext>
   )
 }
