@@ -31,6 +31,8 @@ export const CourseProgressButton = ({
                 {isCompleted :! isCompleted}
             );
             if(!isCompleted && !nextChapterId){
+                router.refresh();
+
                 confetti.onOpen();
             }
             if(!isCompleted && nextChapterId){
@@ -49,7 +51,7 @@ export const CourseProgressButton = ({
     return(
         <div>
             <Button onClick={onClick} className="w-full md:w-auto"variant={isCompleted  ? "success":"default"}>
-            {isCompleted ? "Not completed": "Mark as completed"}
+            {isCompleted ? "Completed": "Mark as completed"}
             <Icon className="h-4 w-4 ml-2 "/>
 
             </Button>

@@ -49,6 +49,8 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             />
           ): <CourseProgressButton courseId={params.courseId}
           chapterId={params.chapterId}
+          nextChapterId={nextChapter?.id}
+          isCompleted={!!userProgress?.isCompleted}
           />}
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
