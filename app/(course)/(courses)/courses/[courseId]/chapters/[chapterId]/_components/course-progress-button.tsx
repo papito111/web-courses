@@ -36,7 +36,8 @@ export const CourseProgressButton = ({
             if(!isCompleted && nextChapterId){
                 router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
             }
-
+            toast.success("Progress updated")
+            router.refresh();
         }
         catch{
             toast.error("Something went wrong")
@@ -47,7 +48,7 @@ export const CourseProgressButton = ({
 
     return(
         <div>
-            <Button className="w-full md:w-auto"variant={isCompleted  ? "success":"default"}>
+            <Button onClick={onClick} className="w-full md:w-auto"variant={isCompleted  ? "success":"default"}>
             {isCompleted ? "Not completed": "Mark as completed"}
             <Icon className="h-4 w-4 ml-2 "/>
 

@@ -47,7 +47,9 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
               courseId={params.courseId}
               price={course?.price!}
             />
-          ): <CourseProgressButton />}
+          ): <CourseProgressButton courseId={params.courseId}
+          chapterId={params.chapterId}
+          />}
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="prose max-w-none text-xl" dangerouslySetInnerHTML={{ __html: chapter?.description ?? "" }} />
