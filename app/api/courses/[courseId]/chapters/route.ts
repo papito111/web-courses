@@ -1,10 +1,10 @@
 
 import { getAuth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { db } from "@/lib/db";
 
 export async function POST(
-    req:Request,
+    req:NextRequest,
     {params} : {params: {courseId: string}}
 ) {
     try{

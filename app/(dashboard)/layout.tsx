@@ -9,8 +9,7 @@ const Dashboard = ({children}:{children:React.ReactNode}) => {
     <SidebarProvider>
       <AppSidebar />
       <main className="w-full">
-        <Navbar>
-        </Navbar>
+        <Navbar/>
         <div className="h-full flex items-center justify-center">
           {children}
             </div>

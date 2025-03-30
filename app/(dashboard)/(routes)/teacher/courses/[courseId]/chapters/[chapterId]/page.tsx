@@ -39,9 +39,7 @@ const EditChapterPage = async ({ params }:
       }
     },
   )
-  if(!chapter){
-    useRouter().push('/')
-  }
+ 
     const requiredFields = [
       chapter?.title,
       chapter?.description,

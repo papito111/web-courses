@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest} from "next/server";
 import { getAuth } from "@clerk/nextjs/server";
 
 export async function DELETE(
-    req:Request,
+    req:NextRequest,
     {params}: {params:{courseId: string, attachmentId:string}}
 ) {
     try{

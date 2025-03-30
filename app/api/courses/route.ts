@@ -1,8 +1,8 @@
 import {db} from"@/lib/db";
 import {getAuth} from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { NextResponse,NextRequest } from "next/server";
 export async function POST(
-    req: Request,
+    req: NextRequest,
 ) {
     try {
         const {userId} = getAuth(req);
