@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
@@ -35,6 +36,14 @@ const CourseSidebar = async ({course, progressCount}:CourseSidebarProps) => {
                     {course.title}
 
                 </h1>
+                {purchase && (
+                    <div className='mt-5'>
+                    <CourseProgress
+                    variant="success"
+                    value={progressCount}
+                    />
+                    </div>
+                )}
             </div>
             <div className='flex flex-col w-full'>
                 {course.chapters.map((chapter)=>
