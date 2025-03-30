@@ -6,6 +6,8 @@ import { VideoPlayer } from "./_components/video-player";
 import { Banner } from "@/components/banner";
 import CourseEnrollButton from "./_components/course-enroll-button";
 import { Separator } from "@/components/ui/separator";
+import { CourseProgressButton } from "./_components/course-progress-button";
+
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -39,13 +41,13 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
 
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row items-center justify-between px-4">
-          <h1 className="text-3xl font-bold text-gray-800">Opis rozdziału</h1>
-          {!purchase && (
+          <h1 className="text-3xl font-bold  text-gray-800">Opis rozdziału</h1>
+          {!purchase ? (
             <CourseEnrollButton
               courseId={params.courseId}
               price={course?.price!}
             />
-          )}
+          ): <CourseProgressButton />}
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="prose max-w-none text-xl" dangerouslySetInnerHTML={{ __html: chapter?.description ?? "" }} />
