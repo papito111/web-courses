@@ -15,12 +15,16 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
   if (!userId) {
     redirect("/");
   }
+  console.log({userId},'poprawnie pobralo userId')
 
+  console.log('beforechapters')
   const { chapter, course, muxData, attachments, nextChapter, userProgress, purchase } = await getChapter({
     userId,
     chapterId: params.chapterId,
     courseId: params.courseId,
   });
+  console.log({userId, chapter},'after chapters')
+
 
   const isLocked = !chapter?.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
