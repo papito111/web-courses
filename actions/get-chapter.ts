@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { Attachment, Chapter } from "@prisma/client";
 import { MuxData } from "@prisma/client";
-
+import { useRef } from "react";
 interface GetChapterProps {
     userId : string;
     courseId: string;
