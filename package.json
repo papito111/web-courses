@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.3.4",
+    "@dnd-kit/accessibility": "^3.1.1",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
     "@hello-pangea/dnd": "^17.0.0",
     "@hookform/resolvers": "^3.9.1",
     "@mux/mux-node": "^9.0.1",
@@ -62,9 +65,7 @@
   "devDependencies": {
     "prisma": "^6.2.1"
   },
-  
-    "engines": {
-      "node": "20.x"
-    }
-  
+  "engines": {
+    "node": "20.x"
+  }
 }
