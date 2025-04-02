@@ -31,7 +31,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
   return (
     <main className="md:w-11/12 max-w- mx-auto px-4 py-6 space-y-8">
       <section>
-        {/* <VideoPlayer
+        <VideoPlayer
           chapterId={params.chapterId}
           title={chapter?.title!}
           courseId={params.courseId}
@@ -39,16 +39,8 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           playbackid={muxData?.playbackid!}
           isLocked={isLocked}
           completeOnEnd={completeOnEnd}
-        /> */}
-        <VideoPlayer
-  chapterId={params.chapterId}
-  title={chapter?.title || "Nieznany rozdział"} // Domyślny tytuł
-  courseId={params.courseId}
-  nextChapterId={nextChapter?.id} // Default null dla brakującego nextChapter
-  playbackid={muxData?.playbackid || ""} // Jeśli brak playbackid, nie renderuj komponentu
-  isLocked={isLocked}
-  completeOnEnd={completeOnEnd}
-/>
+        />
+        
       </section>
 
       <section className="space-y-4">
