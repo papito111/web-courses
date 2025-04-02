@@ -19,8 +19,8 @@ export const NavbarRoutes = () => {
     return (
       <div className="flex gap-x-2 ml-auto">
         <Link href="/search">
-          <Button className="mr-4 bg-slate-700" variant="ghost">
-            <Home className="h-4 w-4 mr-2"></Home>
+          <Button className=" bg-slate-700" variant="ghost">
+            <Home className="h-4 w-4 "></Home>
             
           </Button>
           </Link>
@@ -32,7 +32,7 @@ export const NavbarRoutes = () => {
           </Button>
           </Link>
         ):(
-          <Link href="/teacher/courses"><Button className="mr-4 bg-slate-700" variant="ghost">Teacher Mode</Button></Link>
+          <Link href="/teacher/courses"><Button className="mr-0 bg-slate-700" variant="ghost">Teacher Mode</Button></Link>
           
        
       )}
