@@ -21,7 +21,7 @@ export const NavbarRoutes = () => {
         <Link href="/search">
           <Button className="mr-4 bg-slate-700" variant="ghost">
             <Home className="h-4 w-4 mr-2"></Home>
-            Courses
+            
           </Button>
           </Link>
         {isTeacherPage || isCoursePage ? (
