@@ -3,7 +3,7 @@ import { getChapter } from "@/actions/get-chapter";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { VideoPlayer } from "./_components/video-player";
-import CourseEnrollButton from "./_components/course-enroll-button";
+import {CourseEnrollButton} from "./_components/course-enroll-button";
 import { Separator } from "@/components/ui/separator";
 import { CourseProgressButton } from "./_components/course-progress-button";
 
@@ -55,7 +55,8 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           chapterId={params.chapterId}
           nextChapterId={nextChapter?.id}
           isCompleted={!!userProgress?.isCompleted}
-          />}
+          />} 
+          {/* ten przycisk daje bledy */}
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="prose max-w-none text-xl" dangerouslySetInnerHTML={{ __html: chapter?.description ?? "" }} />

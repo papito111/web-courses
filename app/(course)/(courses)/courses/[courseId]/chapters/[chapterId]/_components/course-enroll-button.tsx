@@ -11,7 +11,7 @@ interface CourseEnrollButtonProps{
 }
 
 
-const CourseEnrollButton = ({price, courseId}:CourseEnrollButtonProps) => {
+export const CourseEnrollButton = ({price, courseId}:CourseEnrollButtonProps) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const onClick = async () => {
@@ -37,4 +37,3 @@ const CourseEnrollButton = ({price, courseId}:CourseEnrollButtonProps) => {
   )
 }
 
-export default CourseEnrollButton
