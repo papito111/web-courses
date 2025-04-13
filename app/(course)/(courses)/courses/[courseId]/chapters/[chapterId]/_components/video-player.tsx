@@ -1,11 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import MuxPlayer from "@mux/mux-player-react";
 import { Lock } from "lucide-react";
-
-// ⛔️ SSR disabled
-const MuxPlayer = dynamic(() => import("@mux/mux-player-react"), { ssr: false });
 
 interface VideoPlayerProps {
   playbackid: string;
@@ -22,12 +18,6 @@ export const VideoPlayer = ({
   isLocked,
   title,
 }: VideoPlayerProps) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
   return (
     <div className="mx-auto mb-4 xl:w-11/12 w-11/12">
       {/* Nagłówek */}
@@ -45,13 +35,11 @@ export const VideoPlayer = ({
         )}
 
         {/* Kontener z proporcjami 16:9 */}
-        <div className="relative w-full pt-[56.25%]">
-          {!isLocked && hasMounted && (
-            <MuxPlayer
-              playbackId={playbackid}
-              className="absolute top-0 left-0 w-full h-full rounded-lg"
-            />
-          )}
+        <div className="relative w-full pt-[56.25%]"> {/* 16:9 = 9/16 = 56.25% */}
+          <MuxPlayer
+            playbackId={playbackid}
+            className="absolute top-0 left-0 w-full h-full rounded-lg"
+          />
         </div>
       </div>
     </div>
