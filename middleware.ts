@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 // const isPublicRoute = createRouteMatcher(["/api/webhook"]);
 const isPublicRoute = createRouteMatcher([
   "/api/stripe/webhook",
-  "/api/webhook", // jeśli używasz też innych
+  // "/api/webhook", // jeśli używasz też innych
 ]);
 
 
