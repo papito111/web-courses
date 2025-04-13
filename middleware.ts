@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export default clerkMiddleware(async (getAuth, req) => {
   const { userId } = await getAuth();
   if (!userId) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return new NextResponse("Unauthorizeed", { status: 401 });
   }
   return NextResponse.next();
 });
