@@ -1,28 +1,29 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-// const isPublicRoute = createRouteMatcher(["/api/webhook"]);
 const isPublicRoute = createRouteMatcher([
-  "/api/stripe/webhook",
+  "/api/stripe/webhook", // publiczny webhook Stripe
 ]);
 
-
-export default clerkMiddleware((auth, req) => {
-  if (!isPublicRoute(req)) {
-    const authResult = auth.protect();
-    if (authResult instanceof NextResponse) {
-      return authResult;
-    }
-    
+export default clerkMiddleware(async (auth, req) => {
+  // pozwól Stripe wejść bez auth
+  if (isPublicRoute(req)) {
+    return NextResponse.next();
   }
+
+  // awaitujemy obiekt auth
+  const { userId } = await auth();
+
+  if (!userId) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
   return NextResponse.next();
 });
 
-
 export const config = {
   matcher: [
-    
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    '/(api|trpc)(.*)',
+    "/((?!_next|.*\\..*).*)", // pomijaj pliki statyczne
+    "/(api|trpc)(.*)",        // obejmuj wszystkie API i trpc
   ],
 };
