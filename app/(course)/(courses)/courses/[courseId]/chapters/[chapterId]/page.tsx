@@ -31,7 +31,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
   return (
     <main className="md:w-11/12 max-w- mx-auto px-4 py-6 space-y-8">
       <section>
-        {/* <VideoPlayer
+        <VideoPlayer
           chapterId={params.chapterId}
           title={chapter?.title!}
           courseId={params.courseId}
@@ -39,7 +39,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           playbackid={muxData?.playbackid!}
           isLocked={isLocked}
           completeOnEnd={completeOnEnd}
-        /> */}
+        />
         
       </section>
 
