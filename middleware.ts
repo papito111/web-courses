@@ -1,29 +1,32 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher([
-  "/api/stripe/webhook", // publiczny webhook Stripe
-]);
+// Definiujemy trasę webhooka Stripe jako publiczną
+const isPublicRoute = createRouteMatcher(["/api/stripe/webhook"]);
 
 export default clerkMiddleware(async (auth, req) => {
-  // pozwól Stripe wejść bez auth
+  // Jeśli trasa jest publiczna, przepuszczamy bez autoryzacji
   if (isPublicRoute(req)) {
     return NextResponse.next();
   }
 
-  // awaitujemy obiekt auth
+  // Wywołujemy funkcję auth i oczekujemy na wynik
   const { userId } = await auth();
 
+  // Jeśli użytkownik nie jest zalogowany, zwracamy 401
   if (!userId) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
+  // Jeśli użytkownik jest zalogowany, przepuszczamy dalej
   return NextResponse.next();
 });
 
 export const config = {
   matcher: [
-    "/((?!_next|.*\\..*).*)", // pomijaj pliki statyczne
-    "/(api|trpc)(.*)",        // obejmuj wszystkie API i trpc
+    // Pomijamy pliki statyczne
+    "/((?!_next|.*\\..*).*)",
+    // Obejmuje wszystkie trasy API
+    "/(api|trpc)(.*)",
   ],
 };
