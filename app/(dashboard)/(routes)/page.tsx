@@ -31,7 +31,7 @@ export default function Home() {
 
         <div className="w-full max-w-2xl  min-w-xl items-center gap-4">
           <img
-            src="/images/IndustryGuy.png"
+            src="/images/HomePage.png"
             alt="Ilustracja Industry 4.0"
             className="w-full h-auto rounded-tl-2xl"
           />
