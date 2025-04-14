@@ -8,10 +8,10 @@ export default clerkMiddleware(async (getAuth, req) => {
     return NextResponse.next();
   }
 
-  const { userId } = await getAuth();
-  if (!userId) {
-    return new NextResponse("Unauthorized", { status: 401 });
-  }
+  // const { userId } = await getAuth();
+  // if (!userId) {
+  //   return new NextResponse("Unauthorizeed", { status: 401 });
+  // }
 
   return NextResponse.next();
 });
