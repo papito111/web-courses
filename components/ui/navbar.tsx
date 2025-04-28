@@ -7,10 +7,10 @@ import {NavbarRoutes} from "@/components/navbar-routes"
 const Navbar = () => {
 
     return (
-      <nav className="bg-gray-900 text-white p-4 w-full">
+      <nav className="bg-gray-900 sticky text-white p-4 w-full">
         <div className="  flex justify-between items-center w-full">
         <SidebarTrigger />
-          <div>
+          <div className="sticky">
             <div className="text-xl ml-5  font-semibold">Engineer Academy</div>
             
           </div>
@@ -24,3 +24,6 @@ const Navbar = () => {
   
   export default Navbar;
   
+
+
+
